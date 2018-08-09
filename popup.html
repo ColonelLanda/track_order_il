@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      button {
+        height: 30px;
+        width: 60px;
+        outline: none;
+      }
+    </style>
+  
+    <link rel="stylesheet" href="external/tabulator.css">
+    <script type="text/javascript" src="external/jquery-2.2.4.min.js"></script>
+    <script type="text/javascript" src="external/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="external/tabulator.js"></script>
+  </head>
+  <body>
+    
+    <label for="track">Barcode:</label>
+    <input type="text" name="track" id="track"/>   
+    <button id="trackButton">Track</button>
+    <div id="result"></div>
+
+   
+    <script type="module" src="track_order.js"></script>
+    <script type="module" src="popup.js"></script>
+  </body>
+</html>
