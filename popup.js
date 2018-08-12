@@ -35,26 +35,33 @@ function handleErrorResponse(jdata) {
 }
 
 function createResponseTable(jdata) {
-  const headers = jdata.Result.itemcodeinfo.ColumnHeaders.map((val, index, arr) => {
-    return {
-      title: val,
-      field: val,
-      headerSort: false,
-      align: "right"
-    };
-  });
-
-  const lineData = jdata.Result.itemcodeinfo.InfoLines.map((line, lineIndex, arr) => {
-    let lineObj = {}
-    line.forEach((field, index, arr) => {
-      lineObj[jdata.Result.itemcodeinfo.ColumnHeaders[index]] = field;
+  if (jdata.Result.itemcodeinfo.ColumnHeaders.length == 0 && 
+    jdata.Result.itemcodeinfo.InfoLines.length == 1)  {
+    $("#result").text(jdata.Result.itemcodeinfo.InfoLines[0]);
+    $("#result").width(400).css("direction", "rtl");
+  } else {
+    const headers = jdata.Result.itemcodeinfo.ColumnHeaders.map((val, index, arr) => {
+      return {
+        title: val,
+        field: val,
+        headerSort: false,
+        align: "right"
+      };
     });
-    return lineObj;
-
-  })
-
-  $("#result").tabulator({
-    columns: headers
-  });
-  $("#result").tabulator("setData", lineData);
+  
+    const lineData = jdata.Result.itemcodeinfo.InfoLines.map((line, lineIndex, arr) => {
+      let lineObj = {}
+      line.forEach((field, index, arr) => {
+        lineObj[jdata.Result.itemcodeinfo.ColumnHeaders[index]] = field;
+      });
+      return lineObj;
+  
+    })
+  
+    $("#result").tabulator({
+      columns: headers
+    });
+    $("#result").tabulator("setData", lineData);
+  }
+  
 }
